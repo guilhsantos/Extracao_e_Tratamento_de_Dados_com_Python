@@ -1,3 +1,5 @@
+🇧🇷 **Português** · [🇺🇸 English](README.en.md)
+
 # Limpeza de dados e RFM de clientes de e-commerce
 
 Tratamento de uma base real de vendas de e-commerce em 37 países e cálculo da RFM (recência, frequência e ticket médio) de cada cliente, pronta para segmentação.
