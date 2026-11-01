@@ -1,55 +1,39 @@
-# Análise e Modelagem de Dados de E-commerce
-## Descrição do Projeto
-Este projeto visa estruturar e analisar dados de vendas de uma empresa de e-commerce, aplicando técnicas de limpeza e organização de dados (data cleaning e data wrangling). O objetivo é calcular as métricas RFM (Recência, Frequência e Ticket Médio) para os clientes e gerar gráficos para análise de vendas por mês, produtos e países.
+# Limpeza de dados e RFM de clientes de e-commerce
 
-## Dataset Utilizado
-O dataset utilizado contém informações sobre compras realizadas em um e-commerce em 37 países. As principais colunas do dataset são:
+Tratamento de uma base real de vendas de e-commerce em 37 países e cálculo da RFM (recência, frequência e ticket médio) de cada cliente, pronta para segmentação.
 
-- CustomerID: Código de identificação do cliente
-- InvoiceNo: Código da fatura
-- StockCode: Código do produto
-- Description: Descrição do produto
-- Quantity: Quantidade de produtos comprados
-- InvoiceDate: Data da compra
-- UnitPrice: Preço unitário do produto
-- Country: País de onde a compra foi realizada
+[![Abrir no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/guilhsantos/Extracao_e_Tratamento_de_Dados_com_Python/blob/main/DataPreparationnapratica.ipynb)
 
-## Passos Realizados
-### Passo 1: Carregamento e Análise Inicial
-No primeiro passo, o dataset foi carregado no Google Colab. Utilizei as bibliotecas Pandas, NumPy, Seaborn e Matplotlib para a manipulação e visualização dos dados. Realizei uma análise inicial para entender a estrutura do dataset, verificar valores nulos e identificar possíveis outliers.
+## Problema
 
-### Passo 2: Limpeza e Organização de Dados
-Nesta etapa, limpei os dados removendo valores nulos, tratando outliers e criando novas colunas relevantes, como o valor total de cada pedido (TotalPrice). Também criei a coluna YearMonth para facilitar a análise de vendas mensais.
+A base bruta tinha clientes sem identificação, preços zerados e quantidades negativas (devoluções e descontos). Qualquer análise feita sobre ela mostraria números errados.
 
-### Passo 3: Cálculo das Métricas RFM
-Calculei as métricas RFM (Recência, Frequência e Ticket Médio) para cada cliente, com base nos dados de compras:
+## Solução
 
-Recência (R): Tempo desde a última compra de cada cliente
+Um pipeline em pandas que limpa a base, cria as colunas de valor do pedido e de mês, calcula a RFM por cliente e gera os gráficos de vendas.
 
-Frequência (F): Quantidade total de compras realizadas
+## Resultado
 
-Ticket Médio (M): Média do valor gasto por pedido
+- **Tabela RFM por cliente** exportada em `e-commerce_RFM.csv`. Exemplo: o cliente 12347 comprou há 1 dia, tem 182 compras e ticket médio de 23,68.
+- **Top 10 países** em faturamento e **top 10 produtos** mais vendidos.
+- **Evolução mensal das vendas**, no geral e por país, mostrando os picos e vales do ano.
 
-### Passo 4: Análise Gráfica
-Criei gráficos para visualizar os dados e insights obtidos:
+## Como fiz
 
-Top 10 países com maior valor em vendas: Um gráfico de barras foi gerado para mostrar os 10 países que mais contribuíram em vendas.
+1. Carga e inspeção: nulos, preços ≤ 0 e quantidades ≤ 0.
+2. Limpeza: remoção de nulos, devoluções e outliers.
+3. Novas colunas: `TotalPrice` (quantidade × preço) e `YearMonth`.
+4. RFM por cliente: dias desde a última compra, número de compras e valor médio por pedido.
+5. Gráficos de barras e linhas com Seaborn e Matplotlib.
 
-Top 10 produtos mais vendidos: Outro gráfico de barras destacou os produtos mais vendidos.
+## Próximo passo
 
-Valor de vendas por mês: Um gráfico de linha mostrou a evolução das vendas ao longo dos meses.
+Clusterizar os clientes sobre essa RFM. A primeira versão da segmentação, feita por compra, está em [RFV_Analysis_Clustering](https://github.com/guilhsantos/RFV_Analysis_Clustering).
 
-Valor de vendas por mês e por país (Top 10 países): Visualizei a tendência das vendas ao longo dos meses, segmentada pelos 10 países com maior volume de vendas.
+## Stack
 
-#### Resultados
-Top 10 Países: Identificamos os países que mais geraram receita para o e-commerce.
+Python · pandas · NumPy · Seaborn · Matplotlib · Google Colab
 
-Top 10 Produtos: Os produtos mais vendidos foram mapeados, permitindo otimizar o estoque.
+---
 
-Tendência de Vendas Mensais: Observamos variações no valor total de vendas ao longo dos meses, destacando períodos de alta e baixa.
-
-Análise por País: Foi possível entender o desempenho de vendas segmentado pelos principais países, o que pode ajudar a ajustar campanhas de marketing e operações.
-
-### Conclusão
-Este projeto mostrou a importância da limpeza e organização dos dados para garantir uma análise precisa. As métricas RFM fornecem uma visão detalhada sobre o comportamento dos clientes, enquanto os gráficos gerados ajudaram a identificar padrões de vendas ao longo do tempo e em diferentes regiões.
-
+Feito por [Guilherme Santos](https://portifolio-guilherme-santos.vercel.app) · [LinkedIn](https://www.linkedin.com/in/guilherme-santos-dataeng)
